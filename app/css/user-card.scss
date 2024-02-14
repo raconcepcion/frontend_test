@@ -1,6 +1,8 @@
 .user-card {
   display: flex;
   flex-flow: row nowrap;
+  flex-wrap: wrap;
+  gap: 16px;
 
   padding: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
@@ -24,10 +26,6 @@
     justify-content: center;
     align-content: center;
     flex-flow: column nowrap;
-  }
-
-  > .body + .info {
-    margin-left: 16px;
   }
 
   > .info > .name {
