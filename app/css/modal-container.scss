@@ -14,30 +14,27 @@
     color: #172b4d;
     background: #fff;
     border-radius: 8px;
+    width: 100%;
+    margin: 24px;
   }
 
   &.-xs > .body {
-    width: 30%;
     max-width: 360px;
   }
 
   &.-sm > .body {
-    width: 40%;
     max-width: 480px;
   }
 
   &.-md > .body {
-    width: 60%;
     max-width: 768px;
   }
 
   &.-lg > .body {
-    width: 75%;
     max-width: 968px;
   }
 
   &.-xl > .body {
-    width: 80%;
     max-width: 1120px;
   }
 
