@@ -2,14 +2,10 @@
 
 import { useState } from "react";
 import Avatar from "boring-avatars";
-import {
-  FaRegCircleXmark,
-  FaLocationDot,
-  FaPhone,
-  FaEnvelope,
-} from "react-icons/fa6";
+import { FaRegCircleXmark } from "react-icons/fa6";
 
 import Modal from "./modal";
+import UserInfo from "./UserInfo";
 
 import { User } from "./types/user";
 
@@ -17,7 +13,9 @@ export type GalleryProps = {
   users: User[];
 };
 
-const Gallery = ({ users }: GalleryProps) => {
+const Gallery = ({ 
+  users
+}: GalleryProps) => {
   const [usersList, setUsersList] = useState(users);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +23,7 @@ const Gallery = ({ users }: GalleryProps) => {
   const handleModalOpen = (id: number) => {
     const user = usersList.find((item) => item.id === id) || null;
 
-    if(user) {
+    if (user) {
       setSelectedUser(user);
       setIsModalOpen(true);
     }
@@ -38,7 +36,7 @@ const Gallery = ({ users }: GalleryProps) => {
 
   return (
     <div className="user-gallery">
-      <h1 className="heading">Users</h1>
+      <h1 className="heading"> Users </h1>
       <div className="items">
         {usersList.map((user, index) => (
           <div
@@ -51,7 +49,13 @@ const Gallery = ({ users }: GalleryProps) => {
                 size={96}
                 name={user.name}
                 variant="marble"
-                colors={["#92A1C6", "#146A7C", "#F0AB3D", "#C271B4", "#C20D90"]}
+                colors={[
+                  "#92A1C6",
+                  "#146A7C",
+                  "#F0AB3D",
+                  "#C271B4",
+                  "#C20D90"
+                ]}
               />
             </div>
             <div className="info">
@@ -69,56 +73,12 @@ const Gallery = ({ users }: GalleryProps) => {
                 className="close"
                 onClick={handleModalClose}
               >
-                <FaRegCircleXmark size={32} />
+                <FaRegCircleXmark size={32} className="icon" />
               </div>
             </div>
             <div className="body">
               {selectedUser && (
-                <div className="user-info info">
-                  <div className="avatar">
-                    <Avatar
-                      size={240}
-                      name={selectedUser.name}
-                      variant="marble"
-                      colors={[
-                        "#92A1C6",
-                        "#146A7C",
-                        "#F0AB3D",
-                        "#C271B4",
-                        "#C20D90",
-                      ]}
-                    />
-                  </div>
-                  <div className="name">
-                    {selectedUser.name} ({selectedUser.username})
-                  </div>
-                  <div className="field">
-                    <FaLocationDot className="icon" />
-                    <div className="value">
-                      {`${selectedUser.address.street}, ${selectedUser.address.suite}, ${selectedUser.address.city}`}
-                    </div>
-                  </div>
-                  <div className="field">
-                    <FaPhone className="icon" />
-                    <div className="value">
-                      {selectedUser.phone}
-                    </div>
-                  </div>
-                  <div className="field">
-                    <FaEnvelope className="icon" />
-                    <div className="value">
-                      {selectedUser.email}
-                    </div>
-                  </div>
-                  <div className="company">
-                    <div className="name">
-                      {selectedUser.company.name}
-                    </div>
-                    <div className="catchphrase">
-                      {selectedUser.company.catchPhrase}
-                    </div>
-                  </div>
-                </div>
+                <UserInfo user={selectedUser} />
               )}
             </div>
           </div>
