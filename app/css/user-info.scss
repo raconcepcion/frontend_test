@@ -4,25 +4,30 @@
     justify-content: center;
   }
 
+  > .avatar + .name {
+    margin-top: 32px;
+  }
+
   > .name {
     font-size: 27px;
     font-weight: 600;
   }
 
-  > .field {
-    display: flex;
-  }
-
-  > .field + .company {
-    margin-top: 24px;
-  }
-
-  > .avatar + .name {
-    margin-top: 24px;
-  }
-
   > .name + .field {
     margin-top: 16px;
+  }
+
+  > .field {
+    display: flex;
+    align-items: center;
+  }
+
+  > .field + .field {
+    margin-top: 4px;
+  }
+
+  > .field > .icon + .value {
+    margin-left: 8px;
   }
 
   > .field > .icon {
@@ -33,6 +38,10 @@
     color: #7a869a;
   }
 
+  > .field + .company {
+    margin-top: 24px;
+  }
+
   > .company > .name {
     font-size: 18px;
     font-weight: 600;
@@ -40,9 +49,6 @@
 
   > .company > .catchphrase {
     font-style: italic;
-  }
-
-  > .field > .icon + .value {
-    margin-left: 8px;
+    margin-top: 4px;
   }
 }

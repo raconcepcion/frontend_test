@@ -16,6 +16,7 @@ import { User } from "./types/user";
 export type GalleryProps = {
   users: User[];
 };
+
 const Gallery = ({ users }: GalleryProps) => {
   const [usersList, setUsersList] = useState(users);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
@@ -54,8 +55,8 @@ const Gallery = ({ users }: GalleryProps) => {
               />
             </div>
             <div className="info">
-              <div className="name">{user.name}</div>
-              <div className="company">{user.company.name}</div>
+              <div className="name"> {user.name} </div>
+              <div className="company"> {user.company.name} </div>
             </div>
           </div>
         ))}
@@ -93,18 +94,26 @@ const Gallery = ({ users }: GalleryProps) => {
                   </div>
                   <div className="field">
                     <FaLocationDot className="icon" />
-                    <div className="data">{`${selectedUser.address.street}, ${selectedUser.address.suite}, ${selectedUser.address.city}`}</div>
+                    <div className="value">
+                      {`${selectedUser.address.street}, ${selectedUser.address.suite}, ${selectedUser.address.city}`}
+                    </div>
                   </div>
                   <div className="field">
                     <FaPhone className="icon" />
-                    <div className="value">{selectedUser.phone}</div>
+                    <div className="value">
+                      {selectedUser.phone}
+                    </div>
                   </div>
-                  <div className="fields">
+                  <div className="field">
                     <FaEnvelope className="icon" />
-                    <div className="value">{selectedUser.email}</div>
+                    <div className="value">
+                      {selectedUser.email}
+                    </div>
                   </div>
                   <div className="company">
-                    <div className="name">{selectedUser.company.name}</div>
+                    <div className="name">
+                      {selectedUser.company.name}
+                    </div>
                     <div className="catchphrase">
                       {selectedUser.company.catchPhrase}
                     </div>
