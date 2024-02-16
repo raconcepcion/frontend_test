@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Avatar from "boring-avatars";
 import {
   FaRegCircleXmark,
@@ -13,14 +13,19 @@ import Controls from "./controls";
 import Modal from "./modal";
 
 import { User } from "./types/user";
+import { OptionsProps } from "./controls";
+import userSorter from "./helpers/userSorter";
 
 export type GalleryProps = {
   users: User[];
 };
+
 const Gallery = ({ users }: GalleryProps) => {
-  const [usersList, setUsersList] = useState(users);
+  const [usersList, setUsersList] = useState<User[]>(users);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [fieldSort, setFieldSort] = useState<string>("name")
+  const [isAscending, setIsAscending] = useState<boolean>(true)
 
   const handleModalOpen = (id: number) => {
     const user = usersList.find((item) => item.id === id) || null;
@@ -36,14 +41,26 @@ const Gallery = ({ users }: GalleryProps) => {
     setIsModalOpen(false);
   };
 
+  const handleChangeSort = (e: OptionsProps) => {
+    if (['ascending', 'descending'].includes(e.value)) {
+      setIsAscending(e.value === 'ascending')
+    } else if (['name', 'company', 'email'].includes(e.value)) {
+      setFieldSort(e.value)
+    }
+  }
+
+  const sortedUsers = useMemo(() => {
+    return userSorter({state: {usersList, isAscending}, action: fieldSort})
+  }, [usersList, fieldSort, isAscending])
+
   return (
     <div className="user-gallery">
       <div className="heading">
         <h1 className="title">Users</h1>
-        <Controls />
+        <Controls onChangeSort={handleChangeSort} />
       </div>
       <div className="items">
-        {usersList.map((user, index) => (
+        {sortedUsers.map((user: User, index: number) => (
           <div
             className="item user-card"
             key={index}
